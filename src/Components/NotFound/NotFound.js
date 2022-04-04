@@ -3,8 +3,7 @@ import React from 'react';
 const NotFound = () => {
     return (
         <div>
-            <h2>404</h2>
-            <h4>Not Found</h4>
+            <img className='w-screen h-screen' src={"/Notfound.jpg"} alt="" />
         </div>
     );
 };
