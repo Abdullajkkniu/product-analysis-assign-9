@@ -1,16 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import CustomerReview from '../CustomerReview/CustomerReview';
 import { reviewContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
+import useReviews from '../hooks/useReviews';
 
 
 const Home = () => {
+    const navigate = useNavigate();
     // const [reviews, setReviews] = useState([])
-    const [reviews, setReviews] = useContext(reviewContext);
-    useEffect(()=>{
-        fetch('data.json')
-        .then(res=> res.json())
-        .then(data => setReviews(data));
-    },[])
+    // const [reviews, setReviews] = useContext(reviewContext);
+    // useEffect(()=>{
+    //     fetch('data.json')
+    //     .then(res=> res.json())
+    //     .then(data => setReviews(data));
+    // },[])
+    const [reviews] = useReviews([]);
     return (
         <div>
             <div className='grid grid-cols-2 items-center justify-center align-middle container mx-auto px-4'>
@@ -33,11 +37,11 @@ const Home = () => {
                 </div>
                     <div className='grid grid-cols-3 gap-5 mt-10 container mx-auto px-4 '>
                     {
-                        reviews.map(review => <CustomerReview key={review.id} review={review}></CustomerReview>)
+                        reviews.slice(0,3).map(review => <CustomerReview key={review.id} review={review}></CustomerReview>)
                     }
                     </div>
                     <div className='text-center'>
-                    <button className='bg-gray-300 py-3 px-4 rounded-lg mt-20 font-semibold text-blue-900'>See All Reviews</button>
+                    <button onClick={()=>navigate("/reviews")} className='bg-gray-300 py-3 px-4 rounded-lg mt-10 font-semibold text-blue-900'>See All Reviews</button>
                     </div>
                 </div>
         </div>
